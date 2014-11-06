@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="/s.css" rel="stylesheet"/>
+    <script src="/js/jquery-2.1.1.min.js"></script>
+    <script src="/js/jquery.tmpl.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/cfg.js"></script>
+</head>
+<body>
+<div>
+    <div id="cs_ctl">
+        <div id="reqs"></div>
+
+        <div id="forms">
+            <fieldset>
+                <legend id="form_desc">请点选上面的请求</legend>
+                <form id="req_form" target="cs_iframe"></form>
+            </fieldset>
+        </div>
+
+        <div id="form_default_params">
+            <fieldset>
+                <legend>该处设置的参数覆盖请求里面参数，如 token</legend>
+                <p class="form_row"><label>token: </label><input id="token" type="text" name="token" value="ad7c910c763e4895a5a55541fb6c7038" /></p>
+            </fieldset>
+        </div>
+    </div>
+    <iframe id="cs_iframe" style="width: 1024px;height: 768px;float:right;"></iframe>
+</div>
+
+<script type="text/x-jquery-tmpl" id="server_tmpl">
+{{each(i,server) servers}}
+<div>
+    <p>${i} : ${server.url}</p>
+    <ul>
+    {{each(j,req) server.reqs}}
+        <li server="${i}" req="${j}"><i class="req_name">${j}</i> : <i class="req_desc">${req.desc}</i><i class="req_media">${req.media}</i> </li>
+        {{if $.type(req.params)=='array'}}
+            <ul>
+            {{each(k,p) req.params}}
+                <li server="${i}" req="${j}" param="${k}"><i class="req_desc">${p.desc}</i><i class="req_media">${p.media}</i> </li>
+            {{/each}}
+            </ul>
+        {{/if}}
+    {{/each}}
+    </ul>
+</div>
+{{/each}}
+</script>
+
+<script src="/app.js"></script>
+</body>
+</html>
