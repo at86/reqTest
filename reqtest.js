@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 //app.use(express.logger('dev'));
 //app.use(express.bodyParser({uploadDir: __dirname + '/uploads'}));
 //app.use(express.methodOverride());
-
+//
 //app.use(express.json());
 //app.use(express.cookieParser('my secret here'));
 //app.use(express.cookieSession({ secret: 'tobo!', cookie: { maxAge: 60 * 60 * 1000 }}));//必须位于app.use(app.router);前
@@ -27,13 +27,14 @@ var session = require('cookie-session');
 
 app.use(morgan('dev')); //app.use(express.logger('dev'));
 app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(session({
     keys: ['key1', 'key2']
 }));
 
-//app.use(app.router); //4.0 注释掉
+////app.use(app.router); //4.0 注释掉
 //endregion
 
 
@@ -44,8 +45,8 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
 //atdo ejs-locals Express 3.x layout, partial and block template functions for the EJS template engine.
-//var ejslocal = require('ejs-locals');
-//app.engine('html', ejslocal);
+var ejslocal = require('ejs-locals');
+app.engine('html', ejslocal);
 var partial = require('express-partial');
 app.use(partial());
 app.get('/partials', function (req, res) {
