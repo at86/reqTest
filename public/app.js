@@ -1,6 +1,7 @@
 var DJ = {};
-DJ.token = 'ad7c910c763e4895a5a55541fb6c7038';
+DJ.token = '027d3ce35504404f9191cf6a62463ebb';
 DJ.corpId = '864101149000387';
+$('#js_token').val(DJ.token);
 
 //调用相关web 服务的接口时，先登录web 服务。直接设置在此处设置 cookie 不行。
 //$.cookie('token', DJ.token);
@@ -61,10 +62,25 @@ $('li').click(function () {
         return str;
     };
 
-    $("#req_form").html(deepCopy(params)).append('<button>提交</button>');
+    //$("#req_form").html(deepCopy(params)).append('<button>提交</button>');
+    $("#req_form").html(deepCopy(params)).prepend('<p class="button"><button>提交</button></p>');
 
-    var token = String($.trim($('#token').val()));
+    var token = String($.trim($('#js_token').val()));
     if (token.length == 32) {
         $("#req_form input[name='token']").val(token);
     }
 });
+
+(function () {
+    var sers = $('#reqs p.server');
+    var j = 0;
+    for (var i in servers) {
+        cannotReq(servers[i].url, j, function (j) {
+            console.log(j)
+            sers.eq(j).parent().addClass('server_off');
+        });
+        j++;
+    }
+})();
+
+
