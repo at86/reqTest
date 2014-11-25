@@ -5,9 +5,10 @@
     <title></title>
     <link href="/s.css" rel="stylesheet"/>
     <script src="/js/jquery-2.1.1.js"></script>
+    <script src="/js/jquery.tmpl.js"></script>
     <script src="/js/jquery.cookie.js"></script>
-    <script src="/js/ejs.js"></script>
     <script src="/js/lib.js"></script>
+
 
     <script src="/cfg.js"></script>
 </head>
@@ -32,6 +33,26 @@
     </div>
     <iframe id="cs_iframe"></iframe>
 </div>
+
+<script type="text/x-jquery-tmpl" id="server_tmpl">
+{{each(i,server) servers}}
+<div>
+    <p class="server"><i>${i}</i> : ${server.url}</p>
+    <ul>
+    {{each(j,req) server.reqs}}
+        <li server="${i}" req="${j}"><i class="req_name">${j}</i> : <i class="req_desc">${req.desc}</i><i class="req_media">${req.media}</i> </li>
+        {{if $.type(req.params)=='array'}}
+            <ul>
+            {{each(k,p) req.params}}
+                <li server="${i}" req="${j}" param="${k}"><i class="req_desc">${p.desc}</i><i class="req_media">${p.media}</i> </li>
+            {{/each}}
+            </ul>
+        {{/if}}
+    {{/each}}
+    </ul>
+</div>
+{{/each}}
+</script>
 
 <script src="/app.js"></script>
 </body>

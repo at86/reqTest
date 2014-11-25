@@ -1,0 +1,39 @@
+<%
+for(var i in servers){
+  var server = servers[i];
+%>
+<div>
+  <p class="server">
+    <i><%= i %></i>
+    : <%= server.url %>
+  </p>
+  <ul>
+    <%
+    for (var j in server.reqs) {
+      var req = server.reqs[j];
+    %>
+    <li server="<%= i %>" req="<%= j %>">
+      <i class="req_name"><%= j %></i>
+      :
+      <i class="req_desc"><%= req.desc %></i>
+      <i class="req_media"><%= req.media %></i>
+    </li>
+    <% if($.type(req.params) == 'array'){ %>
+    <ul>
+      <%
+      for(var k in req.params){
+        var p = req.params[k];
+      %>
+      <li server="<%= i %>" req="<%= j %>" param="<%= k %>">
+        <i class="req_desc"><%= p.desc %></i>
+        <i class="req_media"><%= p.media %></i>
+      </li>
+      <% } %>
+    </ul>
+    <% } %>
+    <% } %>
+  </ul>
+</div>
+<%
+}
+%>

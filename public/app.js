@@ -7,10 +7,9 @@ $('#js_token').val(DJ.token);
 //$.cookie('token', DJ.token);
 //$.cookie('corpId', DJ.corpId);
 
-
 //请求列表
-$("#reqs").html($("#server_tmpl").tmpl({servers: servers}));
-
+//$("#reqs").html($("#server_tmpl").tmpl({servers: servers}));
+$("#reqs").html(new EJS({url: '/ejs/server.ejs'}).render({servers: servers}));
 $('li').click(function () {
     $("#req_form").html('');
 
