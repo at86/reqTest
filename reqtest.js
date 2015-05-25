@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http');
-
+require('atu');
 //express设置
 app.set('port', 1972);
 app.use(express.static(__dirname + '/public'));
@@ -97,6 +97,7 @@ function get(req, res) {
 var expressController = require('express-controller');
 //Tell expressControllers to use the controllers-directory, and use bind() to set up routing.
 expressController.setDirectory(__dirname + '/controllers').bind(app);
+expressController.find_reqs(app);
 
 
 

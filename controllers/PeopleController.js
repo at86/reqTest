@@ -51,14 +51,25 @@ module.exports = {
     //atdo 141120
     // cbof_getPreData 是需要提前调用的函数，该类函数在 /global_funs 里面定义。
     // cbof_ 是占位符，getPreData 是 /global_funs 模块里面的函数
-    get_testParames: function (req, res, cbof_getPreData, a, b, c, d, e) {
+    //http://localhost:1972/people/test-params/a/b/c/d/e
+    get_testParams: function (req, res, cbof_getPreData, a, b, c, d, e) {
         //atdo 获取token，用户信息等数据；该部分通用
         //该处调用函数实现功能，使用async，缺点每个action 里面都要调用该函数
         //console.log(getToken(232));
 
         //console.log(req.params); // { a: 'a', b: 'b', c: 'c', d: 'd', e: 'e' }
 
-
+        //var req_obj = {
+        //    type: 'get',
+        //    media: '页面',
+        //    desc: '企业营销效果',
+        //    params: {corpId: '864101149000387', 'month': '201410'},
+        //    params_valid: {
+        //        corpId: {isInt: '', toInt: ''},
+        //        month: {isLength: [6, 6], isInt: '', toInt: ''}
+        //    },
+        //    writer: '岸涛，金龙'
+        //};
         //console.log(a, b, c, d, e);
         res.send('how many parameters can be dealed');
     }
